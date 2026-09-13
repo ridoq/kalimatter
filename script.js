@@ -153,30 +153,66 @@ btnReset.addEventListener('click', () => {
     showToast('Semua pengaturan dan teks telah direset');
 });
 
+async function executeCopy(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch (e) {
+        }
+    }
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.top = '0';
+    textarea.style.left = '-9999px';
+    textarea.style.opacity = '0';
+    textarea.setAttribute('readonly', '');
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    textarea.setSelectionRange(0, textarea.value.length);
+    let success = false;
+    try {
+        success = document.execCommand('copy');
+    } catch (err) {
+        success = false;
+    }
+    document.body.removeChild(textarea);
+    return success;
+}
+
 btnCopy.addEventListener('click', async () => {
-    const textToCopy = styledOutput.innerText || styledOutput.textContent;
+    const textToCopy = styledOutput.textContent || styledOutput.innerText;
     if (!textToCopy) {
         showToast('Tidak ada teks untuk disalin!');
         return;
     }
 
-    try {
-        await navigator.clipboard.writeText(textToCopy);
+    const copied = await executeCopy(textToCopy);
+    if (copied) {
         copyText.textContent = 'Tersalin!';
         showToast('Teks berhasil disalin ke clipboard!');
         setTimeout(() => {
             copyText.textContent = 'Salin Hasil';
         }, 2000);
-    } catch (err) {
-        const textarea = document.createElement('textarea');
-        textarea.value = textToCopy;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        showToast('Teks berhasil disalin!');
+    } else {
+        showToast('Gagal menyalin otomatis. Silakan salin manual.');
     }
 });
+
+const btnShareWA = document.getElementById('btnShareWA');
+if (btnShareWA) {
+    btnShareWA.addEventListener('click', () => {
+        const text = styledOutput.textContent || styledOutput.innerText;
+        if (!text) {
+            showToast('Tidak ada teks untuk dikirim!');
+            return;
+        }
+        const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+        window.open(waUrl, '_blank');
+    });
+}
 
 window.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
@@ -207,7 +243,7 @@ function updateOutput() {
     }
 
     if (chkReverse.checked) {
-        processedText = processedText.split('').reverse().join('');
+        processedText = [...processedText].reverse().join('');
     }
 
     applyVisualStyles();
@@ -248,6 +284,10 @@ function applyVisualStyles() {
             styledOutput.style.fontFamily = "'Times New Roman', Times, serif";
         } else if (fontVal === 'montserrat') {
             styledOutput.style.fontFamily = "'Montserrat', sans-serif";
+        } else if (fontVal === 'playfair') {
+            styledOutput.style.fontFamily = "'Playfair Display', serif";
+        } else if (fontVal === 'amoresa') {
+            styledOutput.style.fontFamily = "'Great Vibes', cursive";
         } else {
             styledOutput.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
         }
@@ -264,24 +304,30 @@ function convertToUnicode(str) {
     const isBold = chkBold.checked;
     const isItalic = chkItalic.checked;
     const isMono = chkMono.checked;
-    const isSerif = fontSelect.value === 'times new roman';
+    const fontVal = fontSelect.value;
+    const isSerif = fontVal === 'times new roman' || fontVal === 'playfair';
+    const isScript = fontVal === 'amoresa';
 
     if (isMono) {
         result = mapToUnicode(result, unicodeMapMono);
+    } else if (isScript) {
+        result = mapToUnicode(result, isBold ? unicodeMapScriptBold : unicodeMapScript);
     } else if (isBold && isItalic) {
         result = mapToUnicode(result, isSerif ? unicodeMapSerifBoldItalic : unicodeMapBoldItalic);
     } else if (isBold) {
         result = mapToUnicode(result, isSerif ? unicodeMapSerifBold : unicodeMapBold);
     } else if (isItalic) {
         result = mapToUnicode(result, isSerif ? unicodeMapSerifItalic : unicodeMapItalic);
+    } else if (isSerif) {
+        result = mapToUnicode(result, unicodeMapSerifItalic);
     }
 
     if (chkStrike.checked) {
-        result = result.split('').map(char => char === '\n' ? '\n' : char + '\u0336').join('');
+        result = [...result].map(char => char === '\n' ? '\n' : char + '\u0336').join('');
     }
 
     if (chkUnderline.checked) {
-        result = result.split('').map(char => char === '\n' ? '\n' : char + '\u0332').join('');
+        result = [...result].map(char => char === '\n' ? '\n' : char + '\u0332').join('');
     }
 
     return result;
@@ -317,7 +363,7 @@ function convertToHTML(str) {
 }
 
 function mapToUnicode(text, map) {
-    return text.split('').map(char => map[char] || char).join('');
+    return [...text].map(char => map[char] || char).join('');
 }
 
 const unicodeMapBold = {
@@ -371,7 +417,7 @@ const unicodeMapBoldItalic = {
     'A': '𝘼', 'B': '𝘽', 'C': '𝘾', 'D': '𝘿', 'E': '𝙀', 'F': '𝙁', 'G': '𝙂', 'H': '𝙃', 'I': '𝙄', 'J': '𝙅',
     'K': '𝙆', 'L': '𝙇', 'M': '𝙈', 'N': '𝙉', 'O': '𝙊', 'P': '𝙋', 'Q': '𝙌', 'R': '𝙍', 'S': '𝙎', 'T': '𝙏',
     'U': '𝙐', 'V': '𝙑', 'W': '𝙒', 'X': '𝙓', 'Y': '𝙔', 'Z': '𝙕',
-    'a': '𝙖', 'b': '𝙗', 'c': '𝙘', 'd': '𝒅', 'e': '𝙚', 'f': '𝙛', 'g': '𝙜', 'h': '𝙝', 'i': '𝙞', 'j': '𝙟',
+    'a': '𝙖', 'b': '𝙗', 'c': '𝙘', 'd': '𝙙', 'e': '𝙚', 'f': '𝙛', 'g': '𝙜', 'h': '𝙝', 'i': '𝙞', 'j': '𝙟',
     'k': '𝙠', 'l': '𝙡', 'm': '𝙢', 'n': '𝙣', 'o': '𝙤', 'p': '𝙥', 'q': '𝙦', 'r': '𝙧', 's': '𝙨', 't': '𝙩',
     'u': '𝙪', 'v': '𝙫', 'w': '𝙬', 'x': '𝙭', 'y': '𝙮', 'z': '𝙯'
 };
@@ -384,6 +430,24 @@ const unicodeMapMono = {
     'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝',
     'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢', 'z': '𝚣',
     '0': '𝟶', '1': '𝟷', '2': '𝟸', '3': '𝟹', '4': '𝟺', '5': '𝟻', '6': '𝟼', '7': '𝟽', '8': '𝟾', '9': '𝟿'
+};
+
+const unicodeMapScript = {
+    'A': '𝒜', 'B': 'ℬ', 'C': '𝒞', 'D': '𝒟', 'E': 'ℰ', 'F': 'ℱ', 'G': '𝒢', 'H': 'ℋ', 'I': 'ℐ', 'J': '𝒥',
+    'K': '𝒦', 'L': 'ℒ', 'M': 'ℳ', 'N': '𝒩', 'O': '𝒪', 'P': '𝒫', 'Q': '𝒬', 'R': 'ℛ', 'S': '𝒮', 'T': '𝒯',
+    'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳', 'Y': '𝒴', 'Z': '𝒵',
+    'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': 'ℯ', 'f': '𝒻', 'g': 'ℊ', 'h': '𝒽', 'i': '𝒾', 'j': '𝒿',
+    'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': 'ℴ', 'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉',
+    'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎', 'z': '𝓏'
+};
+
+const unicodeMapScriptBold = {
+    'A': '𝓐', 'B': '𝓑', 'C': '𝓒', 'D': '𝓓', 'E': '𝓔', 'F': '𝓕', 'G': '𝓖', 'H': '𝓗', 'I': '𝓘', 'J': '𝓙',
+    'K': '𝓚', 'L': '𝓛', 'M': '𝓜', 'N': '𝓝', 'O': '𝓞', 'P': '𝓟', 'Q': '𝓠', 'R': '𝓡', 'S': '𝓢', 'T': '𝓣',
+    'U': '𝓤', 'V': '𝓥', 'W': '𝓦', 'X': '𝓧', 'Y': '𝓨', 'Z': '𝓩',
+    'a': '𝓪', 'b': '𝓫', 'c': '𝓬', 'd': '𝓭', 'e': '𝓮', 'f': '𝓯', 'g': '𝓰', 'h': '𝓱', 'i': '𝓲', 'j': '𝓳',
+    'k': '𝓴', 'l': '𝓵', 'm': '𝓶', 'n': '𝓷', 'o': '𝓸', 'p': '𝓹', 'q': '𝓺', 'r': '𝓻', 's': '𝓼', 't': '𝓽',
+    'u': '𝓾', 'v': '𝓿', 'w': '𝔀', 'x': '𝔁', 'y': '𝔂', 'z': '𝔃'
 };
 
 function updateInputStats(text) {
