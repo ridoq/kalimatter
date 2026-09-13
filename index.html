@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalimatter — Pengubah Format Teks Responsif & Generator Font Unicode</title>
+    <meta name="description" content="Kalimatter adalah web tools pengubah format teks instan dan reaktif. Ubah teks biasa menjadi font Unicode tebal, miring, monospace untuk WhatsApp, Instagram, Markdown, dan HTML secara lokal dan aman.">
+    <meta name="keywords" content="text formatter, kalimatter, font wa tebal, font wa miring, unicode generator, format teks whatsapp, reactive text formatter">
+    <meta name="author" content="Taufiqi Ridho Maulana (Ridoo)">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#3498DB">
+    <meta name="google-site-verification" content="">
+    <link rel="canonical" href="https://kalimatter.vercel.app/">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kalimatter — Pengubah Format Teks Responsif & Generator Unicode">
+    <meta property="og:description" content="Format teks instan, reaktif, dan otomatis untuk WhatsApp, Bio Sosmed, Markdown, dan HTML. 100% lokal & aman.">
+    <meta property="og:url" content="https://kalimatter.vercel.app/">
+    <meta property="og:site_name" content="Kalimatter">
+    <meta property="og:image" content="https://kalimatter.vercel.app/logo.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kalimatter — Pengubah Format Teks Responsif">
+    <meta name="twitter:description" content="Format teks instan & reaktif untuk WhatsApp, Markdown, dan HTML. 100% lokal & aman.">
+    <meta name="twitter:image" content="https://kalimatter.vercel.app/logo.png">
+
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Kalimatter",
+        "url": "https://kalimatter.vercel.app/",
+        "description": "Alat pengubah format teks instan dan reaktif untuk WhatsApp, sosial media, Markdown, dan HTML.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "author": {
+            "@type": "Person",
+            "name": "Taufiqi Ridho Maulana",
+            "url": "https://github.com/ridoq"
+        }
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3498DB",
+                        "primary-hover": "#2980B9",
+                        "primary-light": "#5DADE2",
+                        "primary-container": "#2980B9",
+                        secondary: "#8E44AD",
+                        "secondary-container": "#9B59B6",
+                        background: "#F8FAFC",
+                        surface: "#F8FAFC",
+                        "surface-bright": "#FFFFFF",
+                        "surface-container-lowest": "#FFFFFF",
+                        "surface-container-low": "#F1F5F9",
+                        "surface-container": "#E2E8F0",
+                        "surface-container-high": "#CBD5E1",
+                        "surface-container-highest": "#94A3B8",
+                        "on-surface": "#0F172A",
+                        "on-surface-variant": "#334155",
+                        outline: "#64748B",
+                        "outline-variant": "#CBD5E1",
+                        error: "#EF4444",
+                        "error-container": "#FEE2E2",
+                        "on-error": "#FFFFFF"
+                    },
+                    spacing: {
+                        "space-xs": "0.25rem",
+                        "space-sm": "0.5rem",
+                        "space-md": "0.75rem",
+                        "space-lg": "1rem",
+                        "space-xl": "1.5rem",
+                        "gutter-desktop": "1.5rem"
+                    },
+                    fontFamily: {
+                        "label-ui": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "code-stats": ["JetBrains Mono", "monospace"],
+                        "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+                        sans: ["Plus Jakarta Sans", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-background font-body-md text-on-surface min-h-screen flex flex-col">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/90 backdrop-blur-xl border-b border-outline-variant/60">
+        <div class="max-w-7xl mx-auto h-14 px-4 sm:px-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Kalimatter Logo" class="w-8 h-8 rounded-lg object-contain shadow-[0_0_12px_rgba(52,152,219,0.25)] flex-shrink-0">
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-headline-sm text-lg sm:text-xl font-bold text-on-surface tracking-tight">Kalimatter</h1>
+                        <span class="px-2 py-0.5 rounded-full bg-surface-container border border-outline-variant font-code-stats text-[11px] text-primary font-semibold">v1.0</span>
+                    </div>
+                    <span class="font-label-ui text-xs text-on-surface-variant hidden md:inline-block">Penata Teks Reaktif Instan</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-end w-10 sm:w-28">
+                <button type="button" id="btnReset" class="h-8 px-3 rounded-lg bg-surface-container border border-outline-variant hover:border-outline text-on-surface-variant hover:text-on-surface font-label-ui text-xs font-semibold flex items-center gap-1.5 transition-all">
+                    <span class="material-symbols-outlined text-[16px]">refresh</span>
+                    <span class="hidden sm:inline-block">Reset</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full pt-20 pb-8 px-3 sm:px-6 max-w-7xl mx-auto flex flex-col gap-6">
+        <section class="w-full bg-surface-container-low border border-outline-variant/50 rounded-xl shadow-lg p-4 sm:p-5 flex flex-col gap-4 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+            
+            <div class="flex flex-col gap-2">
+                <span class="font-code-stats text-[11px] font-semibold text-outline uppercase tracking-wider">Pilihan Font (Typeface)</span>
+                <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center bg-surface-container-lowest p-1.5 rounded-lg border border-outline-variant/40 gap-1.5" id="fontPills">
+                    <button type="button" class="font-pill active col-span-2 sm:col-span-1 px-3 py-2 sm:py-1.5 rounded-md text-xs transition-all flex items-center justify-center text-center font-medium" data-font="default">Default (Jakarta Sans)</button>
+                    <button type="button" class="font-pill col-span-1 px-3 py-2 sm:py-1.5 rounded-md text-xs transition-all flex items-center justify-center text-center font-medium" data-font="arial">Arial</button>
+                    <button type="button" class="font-pill col-span-1 px-3 py-2 sm:py-1.5 rounded-md text-xs transition-all flex items-center justify-center text-center font-medium" data-font="poppins">Poppins</button>
+                    <button type="button" class="font-pill col-span-1 px-3 py-2 sm:py-1.5 rounded-md text-xs transition-all flex items-center justify-center text-center font-medium" data-font="times new roman">Times New Roman</button>
+                    <button type="button" class="font-pill col-span-1 px-3 py-2 sm:py-1.5 rounded-md text-xs transition-all flex items-center justify-center text-center font-medium" data-font="montserrat">Montserrat</button>
+                </div>
+                <select id="fontSelect" class="hidden">
+                    <option value="default">Default (Jakarta Sans)</option>
+                    <option value="arial">Arial</option>
+                    <option value="poppins">Poppins</option>
+                    <option value="times new roman">Times New Roman</option>
+                    <option value="montserrat">Montserrat</option>
+                </select>
+            </div>
+
+            <div class="h-[1px] bg-outline-variant/30 w-full"></div>
+
+            <div class="flex flex-col lg:flex-row lg:items-center gap-4 justify-between">
+                <div class="flex flex-col gap-2 flex-1">
+                    <span class="font-code-stats text-[11px] font-semibold text-outline uppercase tracking-wider">Gaya Format Teks</span>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-label-ui text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkBold" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span class="font-bold">B</span>
+                            <span>Bold</span>
+                        </label>
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-label-ui text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkItalic" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span class="italic font-serif">I</span>
+                            <span>Italic</span>
+                        </label>
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-label-ui text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkUnderline" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span class="underline">U</span>
+                            <span>Underline</span>
+                        </label>
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-label-ui text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkStrike" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span class="line-through">S</span>
+                            <span>Strikethrough</span>
+                        </label>
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-code-stats text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkMono" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span>[M]</span>
+                            <span>Monospace</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="h-[1px] lg:h-10 lg:w-[1px] bg-outline-variant/30 self-stretch"></div>
+
+                <div class="flex flex-col gap-2 flex-1">
+                    <span class="font-code-stats text-[11px] font-semibold text-outline uppercase tracking-wider">Kapitalisasi & Transformasi</span>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-label-ui text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkUpper" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span class="font-bold">AA</span>
+                            <span>Uppercase</span>
+                        </label>
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-label-ui text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkLower" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span>aa</span>
+                            <span>Lowercase</span>
+                        </label>
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-label-ui text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkCapital" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span class="font-semibold">Aa</span>
+                            <span>Capitalize</span>
+                        </label>
+                        <label class="toggle-pill px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant font-label-ui text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-all">
+                            <input type="checkbox" id="chkReverse" class="hidden">
+                            <span class="material-symbols-outlined text-[15px] toggle-check">check</span>
+                            <span class="material-symbols-outlined text-[14px]">swap_horiz</span>
+                            <span>Reverse</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            <div class="flex flex-col bg-surface-container-low border border-outline-variant/50 rounded-xl shadow-lg overflow-hidden group focus-within:border-primary/50 transition-all">
+                <div class="h-12 px-4 sm:px-5 bg-surface-container border-b border-outline-variant/40 flex items-center justify-between gap-2 select-none">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-code-stats text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                            Input
+                        </span>
+                        <span class="px-2 py-0.5 rounded bg-surface-container-high font-code-stats text-[11px] text-outline">UTF-8</span>
+                        <span class="font-label-ui text-xs text-on-surface-variant hidden sm:inline-block">Teks Asli</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" id="btnPaste" class="h-7 px-2.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface font-label-ui text-xs flex items-center gap-1 transition-all">
+                            <span class="material-symbols-outlined text-[14px]">content_paste</span>
+                            <span class="hidden sm:inline-block">Paste</span>
+                        </button>
+                        <button type="button" id="btnClearInput" class="h-7 px-2.5 rounded bg-surface-container-high hover:bg-error-container hover:text-error text-on-surface-variant font-label-ui text-xs flex items-center gap-1 transition-all">
+                            <span class="material-symbols-outlined text-[14px]">delete_sweep</span>
+                            <span class="hidden sm:inline-block">Clear</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 sm:p-5 flex-1 flex flex-col bg-surface-container-lowest">
+                    <textarea id="inputText" class="w-full h-full min-h-[380px] bg-transparent text-on-surface font-code-stats text-sm placeholder:text-outline/70 resize-none focus:outline-none leading-relaxed" placeholder="Ketik atau tempelkan teks Anda di sini..." spellcheck="false"></textarea>
+                </div>
+                <div class="h-10 px-4 sm:px-5 bg-surface-container-lowest border-t border-outline-variant/30 flex items-center justify-between font-code-stats text-xs text-on-surface-variant">
+                    <div class="flex items-center gap-4 divide-x divide-outline-variant/40">
+                        <span>Karakter: <strong id="inCharCount" class="text-on-surface">0</strong></span>
+                        <span class="pl-4">Kata: <strong id="inWordCount" class="text-on-surface">0</strong></span>
+                        <span class="pl-4 hidden sm:inline-block">Baris: <strong id="inLineCount" class="text-on-surface">0</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col bg-surface-container-low border border-outline-variant/50 rounded-xl shadow-lg overflow-hidden relative">
+                <div class="h-12 px-4 sm:px-5 bg-surface-container border-b border-outline-variant/40 flex items-center justify-between gap-2 select-none">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-code-stats text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 shadow-[0_0_10px_rgba(52,152,219,0.25)]">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                            Live Preview
+                        </span>
+                    </div>
+                    <div class="flex items-center bg-surface-container-lowest p-0.5 rounded-lg border border-outline-variant/40" id="modePills">
+                        <button type="button" class="mode-pill active px-2 sm:px-2.5 py-1 rounded text-[11px] sm:text-xs transition-all" data-mode="unicode">Unicode</button>
+                        <button type="button" class="mode-pill px-2 sm:px-2.5 py-1 rounded text-[11px] sm:text-xs transition-all" data-mode="markdown">Markdown</button>
+                        <button type="button" class="mode-pill px-2 sm:px-2.5 py-1 rounded text-[11px] sm:text-xs transition-all" data-mode="html">HTML</button>
+                        <button type="button" class="mode-pill px-2 sm:px-2.5 py-1 rounded text-[11px] sm:text-xs transition-all" data-mode="plain">Visual</button>
+                    </div>
+                    <select id="outputMode" class="hidden">
+                        <option value="unicode">Unicode</option>
+                        <option value="markdown">Markdown</option>
+                        <option value="html">HTML</option>
+                        <option value="plain">Visual</option>
+                    </select>
+                </div>
+                <div class="p-4 sm:p-5 flex-1 flex flex-col relative bg-surface-container-lowest overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-transparent to-secondary/[0.04] pointer-events-none"></div>
+                    <div id="styledOutput" class="w-full h-full min-h-[380px] bg-transparent text-on-surface text-base select-text overflow-y-auto leading-relaxed whitespace-pre-wrap relative z-10 p-2 outline-none" tabindex="0"></div>
+                    <div id="toast" class="toast">
+                        <span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+                        <span id="toastText">Tersalin ke clipboard!</span>
+                    </div>
+                </div>
+                <div class="h-14 px-4 sm:px-5 bg-surface-container-lowest border-t border-outline-variant/30 flex items-center justify-between font-code-stats text-xs text-on-surface-variant">
+                    <div class="flex items-center gap-4 divide-x divide-outline-variant/40">
+                        <span>Karakter: <strong id="outCharCount" class="text-on-surface">0</strong></span>
+                        <span class="pl-4">Kata: <strong id="outWordCount" class="text-on-surface">0</strong></span>
+                    </div>
+                    <button type="button" id="btnCopy" class="h-9 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white font-label-ui text-xs font-semibold flex items-center gap-1.5 shadow-[0_0_16px_rgba(52,152,219,0.35)] hover:shadow-[0_0_24px_rgba(52,152,219,0.55)] transition-all transform active:scale-95">
+                        <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                        <span id="copyText">Salin Hasil</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full bg-surface-container-lowest border-t border-outline-variant/40 py-4 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 font-code-stats text-xs text-on-surface-variant">
+            <div class="flex items-center gap-2">
+                <span>© 2026 Kalimatter</span>
+                <span>•</span>
+                <span>Crafted with <span class="text-primary font-bold">🤙</span> by <a href="https://github.com/ridoq" target="_blank" rel="noopener noreferrer" class="font-semibold text-primary hover:underline transition-all">Ridoo</a></span>
+            </div>
+            <div class="flex items-center gap-3 text-outline">
+                <span>v1.0</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

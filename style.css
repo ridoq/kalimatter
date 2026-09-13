@@ -1,0 +1,133 @@
+@layer base {
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.toggle-pill {
+    user-select: none;
+    cursor: pointer;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-pill.active {
+    background-color: rgba(52, 152, 219, 0.12);
+    color: #2471a3;
+    border-color: rgba(52, 152, 219, 0.45);
+    box-shadow: 0 0 12px rgba(52, 152, 219, 0.22);
+}
+
+.toggle-pill .toggle-check {
+    opacity: 0;
+    width: 0;
+    margin-right: 0;
+    overflow: hidden;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-pill.active .toggle-check {
+    opacity: 1;
+    width: 15px;
+    margin-right: 2px;
+}
+
+.font-pill {
+    background: transparent;
+    color: #334155;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    border: 1px solid transparent;
+    user-select: none;
+    cursor: pointer;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 640px) {
+    .font-pill {
+        min-height: 32px;
+    }
+}
+
+.font-pill:hover {
+    color: #0f172a;
+    background: #f1f5f9;
+}
+
+.font-pill.active {
+    background-color: rgba(52, 152, 219, 0.12);
+    color: #2471a3;
+    font-weight: 600;
+    border-color: rgba(52, 152, 219, 0.45);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+}
+
+.mode-pill {
+    background: transparent;
+    color: #334155;
+    font-family: 'JetBrains Mono', monospace;
+    border: 1px solid transparent;
+    user-select: none;
+    cursor: pointer;
+}
+
+.mode-pill:hover {
+    color: #0f172a;
+}
+
+.mode-pill.active {
+    background: #e2e8f0;
+    color: #2471a3;
+    font-weight: 600;
+    border-color: #cbd5e1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.styled-output:empty::before {
+    content: "Hasil format akan otomatis muncul di sini...";
+    color: #64748b;
+    font-style: italic;
+}
+
+.toast {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border: 1px solid #cbd5e1;
+    color: #2471a3;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 30;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
