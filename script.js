@@ -26,6 +26,10 @@ const btnReset = document.getElementById('btnReset');
 const btnPaste = document.getElementById('btnPaste');
 const toast = document.getElementById('toast');
 const toastText = document.getElementById('toastText');
+const popupUpdate = document.getElementById('popupUpdate');
+const btnCloseUpdate = document.getElementById('btnCloseUpdate');
+const btnDismissUpdate = document.getElementById('btnDismissUpdate');
+const btnChangelog = document.getElementById('btnChangelog');
 
 const fontPills = document.querySelectorAll('#fontPills .font-pill');
 const modePills = document.querySelectorAll('#modePills .mode-pill');
@@ -474,6 +478,29 @@ function showToast(msg) {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 2200);
+}
+
+function showUpdatePopup() {
+    if (popupUpdate) {
+        popupUpdate.classList.add('show');
+    }
+}
+
+function hideUpdatePopup() {
+    if (popupUpdate) {
+        popupUpdate.classList.remove('show');
+        localStorage.setItem('kalimatter_v2_seen', 'true');
+    }
+}
+
+if (btnCloseUpdate) btnCloseUpdate.addEventListener('click', hideUpdatePopup);
+if (btnDismissUpdate) btnDismissUpdate.addEventListener('click', hideUpdatePopup);
+if (btnChangelog) btnChangelog.addEventListener('click', showUpdatePopup);
+
+if (!localStorage.getItem('kalimatter_v2_seen')) {
+    setTimeout(() => {
+        showUpdatePopup();
+    }, 700);
 }
 
 syncCheckboxPills();
